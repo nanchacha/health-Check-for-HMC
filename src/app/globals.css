@@ -85,7 +85,8 @@ body {
 /* Status Grid */
 .status-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(8, 1fr);
+  /* Fixed 8 columns for desktop */
   gap: 1rem;
   padding: 2rem;
 }
