@@ -3,12 +3,7 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+
 
 body {
   color: var(--foreground);
@@ -35,7 +30,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .status-indicator {
@@ -46,21 +41,31 @@ body {
 }
 
 .status-green {
-  background-color: #22c55e; /* Green-500 */
+  background-color: #22c55e;
+  /* Green-500 */
   box-shadow: 0 0 10px #22c55e;
 }
 
 .status-red {
-  background-color: #ef4444; /* Red-500 */
+  background-color: #ef4444;
+  /* Red-500 */
   box-shadow: 0 0 10px #ef4444;
 }
 
 .status-loading {
-  background-color: #eab308; /* Yellow-500 */
+  background-color: #eab308;
+  /* Yellow-500 */
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
 }
