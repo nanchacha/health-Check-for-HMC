@@ -101,13 +101,22 @@ body {
   justify-content: center;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 0;
+  /* Important for grid to shrink items */
+  overflow: hidden;
+  /* Hide overflow */
 }
 
 .status-card h2 {
-  font-size: 1.5rem;
+  font-size: clamp(0.75rem, 2.5vw, 1.5rem);
+  /* Responsive font size */
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 1rem;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Status Indicators */
