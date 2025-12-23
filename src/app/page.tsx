@@ -110,27 +110,15 @@ export default function Home() {
     };
 
     return (
-        <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
-            <header style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <main className="main-container">
+            <header className="header-container">
                 <div>
-                    <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Samsung HMC Health Check</h1>
+                    <h1 className="header-title">Samsung HMC Health Check</h1>
                     <p style={{ color: '#666' }}>Monitoring Help Me Choose pages availability</p>
                 </div>
                 <button
                     onClick={() => countries.forEach(checkStatus)}
-                    style={{
-                        padding: '0.75rem 1.5rem',
-                        borderRadius: '6px',
-                        border: 'none',
-                        background: '#0070f3',
-                        color: 'white',
-                        cursor: 'pointer',
-                        fontSize: '1rem',
-                        fontWeight: 'bold',
-                        transition: 'opacity 0.2s'
-                    }}
-                    onMouseOver={(e) => e.currentTarget.style.opacity = '0.9'}
-                    onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+                    className="refresh-button"
                 >
                     Refresh All
                 </button>
@@ -138,45 +126,25 @@ export default function Home() {
 
             <WorldMap statuses={statuses} />
 
-            <div style={{ marginBottom: '2rem' }}>
-                <form onSubmit={handleAddCountry} style={{ display: 'flex', gap: '1rem' }}>
+            <div className="input-form-container">
+                <form onSubmit={handleAddCountry} className="input-form">
                     <input
                         type="text"
                         value={newCountry}
                         onChange={(e) => setNewCountry(e.target.value)}
                         placeholder="Enter country code (e.g. jp)"
-                        style={{
-                            padding: '0.75rem',
-                            borderRadius: '6px',
-                            border: '1px solid #ccc',
-                            flexGrow: 1,
-                            maxWidth: '300px'
-                        }}
+                        className="country-input"
                     />
                     <button
                         type="submit"
-                        style={{
-                            padding: '0.75rem 1.5rem',
-                            borderRadius: '6px',
-                            border: '1px solid #ccc',
-                            background: 'var(--foreground)',
-                            color: 'var(--background)',
-                            cursor: 'pointer'
-                        }}
+                        className="add-button"
                     >
                         Add
                     </button>
                     <button
                         type="button"
                         onClick={handleRemoveCountry}
-                        style={{
-                            padding: '0.75rem 1.5rem',
-                            borderRadius: '6px',
-                            border: '1px solid #ef4444',
-                            background: '#ef4444',
-                            color: 'white',
-                            cursor: 'pointer'
-                        }}
+                        className="remove-button"
                     >
                         Remove
                     </button>
