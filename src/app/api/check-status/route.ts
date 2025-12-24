@@ -10,6 +10,9 @@ export async function GET(request: Request) {
 
     const targetUrl = `https://www.samsung.com/${country}/tvs/help-me-choose/`;
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
     try {
         const response = await fetch(targetUrl, {
             method: 'GET',
@@ -22,8 +25,10 @@ export async function GET(request: Request) {
                 'Upgrade-Insecure-Requests': '1'
             },
             redirect: 'follow',
-            cache: 'no-store'
+            cache: 'no-store',
+            signal: controller.signal
         });
+        clearTimeout(timeoutId);
 
         let isLive = response.status === 200;
         let status = isLive ? 'live' : 'down';
