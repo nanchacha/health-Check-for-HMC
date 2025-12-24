@@ -51,7 +51,11 @@ export async function GET(request: Request) {
                 const lowerTitle = title.toLowerCase();
 
                 // Valid HMC pages usually have these keywords
-                const validKeywords = ['tv', 'choose', 'finder', 'guide', 'selector', 'television', 'fernseher'];
+                // Added Chinese keywords for HK/TW support
+                const validKeywords = [
+                    'tv', 'choose', 'finder', 'guide', 'selector', 'television', 'fernseher',
+                    '電視', '顯示器'
+                ];
 
                 // If title is short (likely "Samsung [Country]") and lacks HMC keywords, it's likely a redirect to home
                 if (title.length < 35 && !validKeywords.some(w => lowerTitle.includes(w))) {
