@@ -109,6 +109,12 @@ export default function Home() {
         return 'Unknown';
     };
 
+    const getFontSize = (code: string) => {
+        if (code.length > 8) return '0.75rem';
+        if (code.length > 5) return '0.9rem';
+        return '1.05rem';
+    };
+
     return (
         <main className="main-container">
             <header className="header-container">
@@ -156,7 +162,7 @@ export default function Home() {
                     const s = statuses[country] || { status: 'idle' };
                     return (
                         <div key={country} className="status-card">
-                            <h2 style={{ fontSize: '1.05rem', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '1rem' }}>{country}</h2>
+                            <h2 style={{ fontSize: getFontSize(country), fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '1rem' }}>{country}</h2>
                             <div
                                 className={`status-indicator ${getStatusColor(s.status)}`}
                                 title={getStatusText(s)}
