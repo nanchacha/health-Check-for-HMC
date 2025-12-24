@@ -25,13 +25,45 @@ export async function GET(request: Request) {
             cache: 'no-store'
         });
 
-        const isLive = response.status === 200; // Only strict 200 counts as live? User said "Loading normally". 
-        // redirects might be okay if they go to the slash version?
-        // Let's pass the status back.
+        let isLive = response.status === 200;
+        let status = isLive ? 'live' : 'down';
+
+        if (isLive) {
+            const html = await response.text();
+            const lowerHtml = html.toLowerCase();
+
+            // 1. Content Check: "Page Not Found" indicators
+            const errorPhrases = [
+                'page not found',
+                '페이지를 찾을 수가 없어요', // KR
+                'seite nicht gefunden', // DE
+                'page introuvable', // FR
+                'página no encontrada' // ES
+            ];
+
+            if (errorPhrases.some(phrase => lowerHtml.includes(phrase))) {
+                isLive = false;
+                status = 'down';
+            } else {
+                // 2. Title Check: Heuristic for generic homepage redirects
+                const titleMatch = html.match(/<title>(.*?)<\/title>/i);
+                const title = titleMatch ? titleMatch[1].trim() : '';
+                const lowerTitle = title.toLowerCase();
+
+                // Valid HMC pages usually have these keywords
+                const validKeywords = ['tv', 'choose', 'finder', 'guide', 'selector', 'television', 'fernseher'];
+
+                // If title is short (likely "Samsung [Country]") and lacks HMC keywords, it's likely a redirect to home
+                if (title.length < 35 && !validKeywords.some(w => lowerTitle.includes(w))) {
+                    isLive = false;
+                    status = 'down';
+                }
+            }
+        }
 
         return NextResponse.json({
             country,
-            status: isLive ? 'live' : 'down',
+            status: status as any,
             httpCode: response.status,
             finalUrl: response.url
         });
