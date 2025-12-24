@@ -156,7 +156,7 @@ export default function Home() {
                     const s = statuses[country] || { status: 'idle' };
                     return (
                         <div key={country} className="status-card">
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '1rem' }}>{country}</h2>
+                            <h2 style={{ fontSize: '1.05rem', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '1rem' }}>{country}</h2>
                             <div
                                 className={`status-indicator ${getStatusColor(s.status)}`}
                                 title={getStatusText(s)}
